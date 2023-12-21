@@ -6,7 +6,7 @@ import 'package:siyatech/screens/home/ui/home_screen.dart';
 
 import '../utils/app_theme.dart';
 
-class SingleNewsItemHeaderDelegate extends SliverPersistentHeaderDelegate {
+class NewsPageHeader extends SliverPersistentHeaderDelegate {
   final String title;
   final String category;
   final String imageAssetPath;
@@ -17,7 +17,7 @@ class SingleNewsItemHeaderDelegate extends SliverPersistentHeaderDelegate {
   @override
   final double minExtent;
 
-  const SingleNewsItemHeaderDelegate(
+  const NewsPageHeader(
       {required this.title,
       required this.category,
       required this.imageAssetPath,

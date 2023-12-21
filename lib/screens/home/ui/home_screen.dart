@@ -128,7 +128,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) =>
-                                              SingleNewsItemPage(
+                                              NewsPage(
                                                 article: article,
                                               )));
                                 },
@@ -199,7 +199,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             itemBuilder: (context, index) {
                               final article = articles[index];
                               return GestureDetector(onTap:(){
-                                Navigator.of(context).push(MaterialPageRoute(builder: (context)=>SingleNewsItemPage(article: article,)));
+                                Navigator.of(context).push(MaterialPageRoute(builder: (context)=>NewsPage(article: article,)));
                               },child: NewsCard(article:article,));
                             });
               }),

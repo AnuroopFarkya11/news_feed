@@ -7,6 +7,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../blocs/NewsBloc.dart';
 import '../../models/article_model.dart';
 import '../../widgets/news_card.dart';
+import '../../widgets/wrap_widgets.dart';
 import '../news/news_screen.dart';
 
 class SearchScreen extends StatefulWidget {
@@ -30,6 +31,14 @@ class _SearchScreenState extends State<SearchScreen> {
 
   @override
   Widget build(BuildContext context) {
+    int selectedContainerIndex = -1;
+    List<String> customNames = [
+      'All',
+      'Politics',
+      'Sports',
+      'Education',
+      'Gaming',
+    ];
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -85,85 +94,20 @@ class _SearchScreenState extends State<SearchScreen> {
             SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Wrap(
-                direction: Axis.horizontal,
-                spacing: 10,
-                children: [
-                  Container(
-                    height: 45,
-                    width: 60,
-                    decoration: BoxDecoration(
-                        color: Colors.blue,
-                        borderRadius: BorderRadius.circular(20)),
-                    child: Center(
-                        child: Text(
-                      'All',
-                      style: TextStyle(
-                          fontFamily: "inter",
-                          color: Colors.white,
-                          fontSize: 15),
-                    )),
-                  ),
-                  Container(
-                    height: 45,
-                    width: 72,
-                    decoration: BoxDecoration(
-                        color: Colors.blue,
-                        borderRadius: BorderRadius.circular(20)),
-                    child: Center(
-                        child: Text(
-                      'Politic',
-                      style: TextStyle(
-                          fontFamily: "inter",
-                          color: Colors.white,
-                          fontSize: 15),
-                    )),
-                  ),
-                  Container(
-                    height: 45,
-                    width: 72,
-                    decoration: BoxDecoration(
-                        color: Colors.blue,
-                        borderRadius: BorderRadius.circular(20)),
-                    child: Center(
-                        child: Text(
-                      'Sports',
-                      style: TextStyle(
-                          fontFamily: "inter",
-                          color: Colors.white,
-                          fontSize: 15),
-                    )),
-                  ),
-                  Container(
-                    height: 45,
-                    width: 95,
-                    decoration: BoxDecoration(
-                        color: Colors.blue,
-                        borderRadius: BorderRadius.circular(20)),
-                    child: Center(
-                        child: Text(
-                      'Education',
-                      style: TextStyle(
-                          fontFamily: "inter",
-                          color: Colors.white,
-                          fontSize: 15),
-                    )),
-                  ),
-                  Container(
-                    height: 45,
-                    width: 65,
-                    decoration: BoxDecoration(
-                        color: Colors.blue,
-                        borderRadius: BorderRadius.circular(20)),
-                    child: Center(
-                        child: Text(
-                      'Gaming',
-                      style: TextStyle(
-                          fontFamily: "inter",
-                          color: Colors.white,
-                          fontSize: 15),
-                    )),
-                  ),
-                ],
+                spacing: 8.0,
+                runSpacing: 8.0,
+                children: List.generate(customNames.length, (index) {
+                  return SelectableContainer(
+                    index: index,
+                    isSelected: selectedContainerIndex == index,
+                    customName: customNames[index],
+                    onTap: () {
+                      setState(() {
+                        selectedContainerIndex = index;
+                      });
+                    },
+                  );
+                }),
               ),
             ),
             SizedBox(
@@ -182,7 +126,7 @@ class _SearchScreenState extends State<SearchScreen> {
                         return GestureDetector(
                             onTap: () {
                               Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (context) => SingleNewsItemPage(
+                                  builder: (context) => NewsPage(
                                         article: article,
                                       )));
                             },

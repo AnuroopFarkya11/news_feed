@@ -34,7 +34,7 @@ class _MyappState extends State<NewsApp> {
             routes: {
               '/': (context) => HomeScreen(),
               '/search': (context) => SearchScreen(),
-              '/news':(context)=>SingleNewsItemPage()
+              '/news':(context)=>NewsPage()
             },
           ),
         ));
