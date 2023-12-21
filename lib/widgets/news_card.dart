@@ -9,13 +9,15 @@ import '../models/article_model.dart';
 
 class NewsCard extends StatelessWidget {
   final Article? article;
-  const NewsCard({super.key,this.article});
+
+  const NewsCard({super.key, this.article});
 
   @override
   Widget build(BuildContext context) {
-    String? utcTimeString = article?.publishedAt ;
+    String? utcTimeString = article?.publishedAt;
     DateTime utcTime = DateTime.parse(utcTimeString!);
-    String formattedTime = DateFormat.yMMMMd().add_jms().format(utcTime.toLocal());
+    String formattedTime =
+        DateFormat.yMMMMd().add_jms().format(utcTime.toLocal());
     log(name: "Formatted time", "${formattedTime}");
     return Container(
       height: 120.h,
@@ -26,7 +28,8 @@ class NewsCard extends StatelessWidget {
           ClipRRect(
             borderRadius: BorderRadius.circular(12.r),
             child: Image.network(
-              article?.urlToImage??"https://t3.ftcdn.net/jpg/03/27/55/60/360_F_327556002_99c7QmZmwocLwF7ywQ68ChZaBry1DbtD.jpg",
+              article?.urlToImage ??
+                  "https://t3.ftcdn.net/jpg/03/27/55/60/360_F_327556002_99c7QmZmwocLwF7ywQ68ChZaBry1DbtD.jpg",
               fit: BoxFit.cover,
               height: 110.h,
               width: 120.w,
@@ -51,7 +54,7 @@ class NewsCard extends StatelessWidget {
                   height: 6.h,
                 ),
                 Text(
-                  article?.title??"You must know why this is a breaking news",
+                  article?.title ?? "You must know why this is a breaking news",
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                   style:
@@ -68,12 +71,26 @@ class NewsCard extends StatelessWidget {
                           .image,
                       radius: 15.r,
                     ),
-                    SizedBox(width: 10.w,),
-                    SizedBox(width:90.w,child: Text(article?.author??"Author",style: TextStyle(color: Colors.grey),overflow: TextOverflow.ellipsis,)),
-                    SizedBox(width: 10.w,),
-
-                    SizedBox(width:50.w,child: Text(formattedTime??"",style: TextStyle(color: Colors.grey),overflow: TextOverflow.ellipsis,)),
-
+                    SizedBox(
+                      width: 10.w,
+                    ),
+                    SizedBox(
+                        width: 90.w,
+                        child: Text(
+                          article?.author ?? "Author",
+                          style: TextStyle(color: Colors.grey),
+                          overflow: TextOverflow.ellipsis,
+                        )),
+                    SizedBox(
+                      width: 10.w,
+                    ),
+                    SizedBox(
+                        width: 50.w,
+                        child: Text(
+                          formattedTime ?? "",
+                          style: TextStyle(color: Colors.grey),
+                          overflow: TextOverflow.ellipsis,
+                        )),
                   ],
                 )
               ],

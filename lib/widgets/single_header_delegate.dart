@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
+import 'package:siyatech/screens/home/ui/home_screen.dart';
 
 import '../utils/app_theme.dart';
 
@@ -35,6 +36,18 @@ class SingleNewsItemHeaderDelegate extends SliverPersistentHeaderDelegate {
     return Stack(
       fit: StackFit.expand,
       children: [
+        Positioned(
+          top: 100.h,
+          child: IconButton(
+              onPressed: () {
+                Navigator.pop(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => HomeScreen(),
+                    ));
+              },
+              icon: Icon(Icons.arrow_back_ios_new_rounded)),
+        ),
         Image.network(
           imageAssetPath,
           fit: BoxFit.cover,
