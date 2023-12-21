@@ -3,13 +3,11 @@ import 'dart:ffi';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_nav_bar/google_nav_bar.dart';
 
 import '../../blocs/NewsBloc.dart';
 import '../../models/article_model.dart';
 import '../../widgets/news_card.dart';
 import '../news/news_screen.dart';
-
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({Key? key}) : super(key: key);
@@ -44,9 +42,8 @@ class _SearchScreenState extends State<SearchScreen> {
           },
         ),
       ),
-
       body: Container(
-       // margin: EdgeInsets.symmetric(vertical: 7.h, horizontal: 10.w),
+        padding: EdgeInsets.only(left: 5.h),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -175,15 +172,23 @@ class _SearchScreenState extends State<SearchScreen> {
             Expanded(
               child: Container(
                 height: 500.h,
-                child: BlocBuilder<NewsBloc,List<Article>>(builder:(context, articles){
+                child: BlocBuilder<NewsBloc, List<Article>>(
+                    builder: (context, articles) {
                   return ListView.builder(
                       shrinkWrap: true,
                       itemCount: articles.length,
                       itemBuilder: (context, index) {
                         final article = articles[index];
-                        return GestureDetector(onTap:(){
-                          Navigator.of(context).push(MaterialPageRoute(builder: (context)=>SingleNewsItemPage(article: article,)));
-                        },child: NewsCard(article:article,));
+                        return GestureDetector(
+                            onTap: () {
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) => SingleNewsItemPage(
+                                        article: article,
+                                      )));
+                            },
+                            child: NewsCard(
+                              article: article,
+                            ));
                       });
                 }),
               ),
