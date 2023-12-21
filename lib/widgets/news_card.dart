@@ -72,8 +72,7 @@ class NewsCard extends StatelessWidget {
                     SizedBox(width:90.w,child: Text(article?.author??"Author",style: TextStyle(color: Colors.grey),overflow: TextOverflow.ellipsis,)),
                     SizedBox(width: 10.w,),
 
-                    // todo use intl dependecies for convertin the string to time
-                    SizedBox(width:25.w,child: Text(formattedTime??"",style: TextStyle(color: Colors.grey),overflow: TextOverflow.ellipsis,)),
+                    SizedBox(width:50.w,child: Text(formattedTime??"",style: TextStyle(color: Colors.grey),overflow: TextOverflow.ellipsis,)),
 
                   ],
                 )

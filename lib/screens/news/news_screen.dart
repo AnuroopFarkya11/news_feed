@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
-import 'package:siyatech/screens/news/single_new_item_header_delegate.dart';
+import 'package:siyatech/widgets/single_header_delegate.dart';
 
 
 import '../../models/article_model.dart';

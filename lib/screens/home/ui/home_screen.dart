@@ -10,7 +10,7 @@ import '../../../models/article_model.dart';
 import '../../../widgets/app_icon.dart';
 import '../../../widgets/news_card.dart';
 import '../../news/news_screen.dart';
-import '../breaking_news_card.dart';
+import '../../../widgets/breaking_news_card.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);

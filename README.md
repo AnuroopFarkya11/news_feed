@@ -1,16 +1,13 @@
-# siyatech_project
+Responsive Design: The app ensures a consistent and visually appealing layout across different screen sizes using the flutter_screenutil package.
 
-A new Flutter project.
+Page Indicator: Navigate through news articles effortlessly with the help of a stylish page indicator provided by the dots_indicator package.
 
-## Getting Started
+Bottom Navigation Bar: Explore different sections of the news app using the bottom navigation bar, which features icons and labels for enhanced user experience. This is made possible by the google_nav_bar package.
 
-This project is a starting point for a Flutter application.
+State Management: The app adopts the BLoC (Business Logic Component) pattern for efficient state management, leveraging the bloc and flutter_bloc packages.
 
-A few resources to get you started if this is your first Flutter project:
+HTTP Requests: Fetch the latest news data from the News API with ease, thanks to the http package.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+Environment Variables: Manage API keys and other environment variables seamlessly using the flutter_dotenv package.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+API used - GET https://newsapi.org/v2/top-headlines?country=us&apiKey=4999ff3a2d7a43a99a3435f981
