@@ -1,10 +1,11 @@
-import 'dart:developer';
+
 
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
+
 import '../../../blocs/NewsBloc.dart';
 import '../../../models/article_model.dart';
 import '../../../widgets/app_icon.dart';
@@ -68,7 +69,7 @@ class _HomeScreenState extends State<HomeScreen> {
           onTap: () {},
         ),
         actions: [
-          IconButton(onPressed: onSearchTap, icon: Icon(Icons.search)),
+          IconButton(onPressed: onSearchTap, icon: Icon(Icons.search, color: Colors.black,)),
           // InterfaceIcon(icon: Icons.search, onTap: onSearchTap),
           InterfaceIcon(icon: Icons.notification_important, onTap: () {}),
         ],
@@ -187,14 +188,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ],
                 )),
 
-        // BlocBuilder<NewsBloc, List<Article>>(
-        // builder: (context, articles) {
-        //     ListView.builder(
-        //         shrinkWrap: true,
-        //         itemCount: 2,
-        //         itemBuilder: (context, index) {
-        //           return NewsCard();
-        //         })
+
 
             Container(
               height: 500.h,

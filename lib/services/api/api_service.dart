@@ -20,6 +20,19 @@ class ApiService{
       throw Exception('Failed to load top headlines');
     }
   }
+  static Future<List<Map<String, dynamic>>> getEverything() async {
+    final response = await http.get(
+      Uri.parse(ApiPath.tesla_News),
+    );
+
+    if (response.statusCode == 200) {
+      final Map<String, dynamic> data = json.decode(response.body);
+      final List<Map<String, dynamic>> articles = List<Map<String, dynamic>>.from(data['articles']);
+      return articles;
+    } else {
+      throw Exception('Failed to load top headlines');
+    }
+  }
 }
 
 

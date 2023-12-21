@@ -1,10 +1,14 @@
 import 'dart:ffi';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 
+import '../../blocs/NewsBloc.dart';
+import '../../models/article_model.dart';
 import '../../widgets/news_card.dart';
+import '../news/news_screen.dart';
 
 
 class SearchScreen extends StatefulWidget {
@@ -16,6 +20,15 @@ class SearchScreen extends StatefulWidget {
 
 class _SearchScreenState extends State<SearchScreen> {
   TextEditingController searchController = TextEditingController();
+
+  late final NewsBloc newsBloc;
+
+  @override
+  void initState() {
+    super.initState();
+    newsBloc = BlocProvider.of<NewsBloc>(context);
+    newsBloc.getEveryNews();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +46,7 @@ class _SearchScreenState extends State<SearchScreen> {
       ),
 
       body: Container(
-        margin: EdgeInsets.symmetric(vertical: 7.h, horizontal: 10.w),
+       // margin: EdgeInsets.symmetric(vertical: 7.h, horizontal: 10.w),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -160,11 +173,19 @@ class _SearchScreenState extends State<SearchScreen> {
               height: 20,
             ),
             Expanded(
-              child: ListView.builder(
-                itemBuilder: (context, index) {
-                  return NewsCard();
-                },
-                itemCount: 10,
+              child: Container(
+                height: 500.h,
+                child: BlocBuilder<NewsBloc,List<Article>>(builder:(context, articles){
+                  return ListView.builder(
+                      shrinkWrap: true,
+                      itemCount: articles.length,
+                      itemBuilder: (context, index) {
+                        final article = articles[index];
+                        return GestureDetector(onTap:(){
+                          Navigator.of(context).push(MaterialPageRoute(builder: (context)=>SingleNewsItemPage(article: article,)));
+                        },child: NewsCard(article:article,));
+                      });
+                }),
               ),
             )
           ],
