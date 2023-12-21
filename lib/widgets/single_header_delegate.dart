@@ -3,6 +3,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import 'package:siyatech/screens/home/ui/home_screen.dart';
+import 'package:siyatech/widgets/app_icon.dart';
 
 import '../utils/app_theme.dart';
 
@@ -36,21 +37,25 @@ class NewsPageHeader extends SliverPersistentHeaderDelegate {
     return Stack(
       fit: StackFit.expand,
       children: [
-        Positioned(
-          top: 100.h,
-          child: IconButton(
-              onPressed: () {
-                Navigator.pop(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => HomeScreen(),
-                    ));
-              },
-              icon: Icon(Icons.arrow_back_ios_new_rounded)),
-        ),
+
+
         Image.network(
           imageAssetPath,
           fit: BoxFit.cover,
+        ),
+        Positioned(
+          // bottom: 10,
+          top: 20,
+          child: CircleAvatar(
+            backgroundColor: Colors.grey, // Set your desired background color
+            radius: 25.r, // Set the radius of the circle
+            child: IconButton(
+              onPressed: (){
+                Navigator.of(context).pop(MaterialPageRoute(builder: (context) => HomeScreen(),));
+              },
+            icon:Icon(Icons.arrow_back_ios_new_rounded, color: Colors.white,), // Set the color of the icon
+            ),
+          )
         ),
         Positioned(
             bottom: 0,
