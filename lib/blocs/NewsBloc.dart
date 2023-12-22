@@ -35,4 +35,18 @@ class NewsBloc extends Cubit<List<Article>> {
       print('Error: $error');
     }
   }
+
+  Future<void> searchKeyword(String? keyword) async {
+    try {
+      final List<Map<String, dynamic>> articles =
+      await ApiService.searchKeyword(keyword);
+      final List<Article> articleObjects =
+      articles.map((article) => Article.fromJson(article)).toList();
+      // log(articleObjects.toString());
+      emit(articleObjects);
+    } catch (error) {
+      // Handle errors
+      print('Error: $error');
+    }
+  }
 }

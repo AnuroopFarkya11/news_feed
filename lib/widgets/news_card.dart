@@ -18,7 +18,6 @@ class NewsCard extends StatelessWidget {
     DateTime utcTime = DateTime.parse(utcTimeString!);
     String formattedTime =
         DateFormat.yMMMMd().add_jms().format(utcTime.toLocal());
-    log(name: "Formatted time", "${formattedTime}");
     return Container(
       height: 120.h,
       margin: EdgeInsets.symmetric(vertical: 7.h, horizontal: 10.w),

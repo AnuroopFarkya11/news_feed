@@ -1,4 +1,5 @@
-import 'dart:ffi';
+import 'dart:developer';
+
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -26,7 +27,7 @@ class _SearchScreenState extends State<SearchScreen> {
   void initState() {
     super.initState();
     newsBloc = BlocProvider.of<NewsBloc>(context);
-    newsBloc.getEveryNews();
+
   }
 
   @override
@@ -73,20 +74,24 @@ class _SearchScreenState extends State<SearchScreen> {
             SizedBox(
               height: 23,
             ),
-            Container(
-              decoration: BoxDecoration(
-                  color: Color(0xffF6F6F7),
-                  borderRadius: BorderRadius.circular(30)),
-              margin: EdgeInsets.only(right: 22),
+            SizedBox(
+              height: 40.h,
               child: TextField(
                 controller: searchController,
                 decoration: InputDecoration(
+                  filled: true,
                     fillColor: Color(0xffF6F6F7),
-                    border: InputBorder.none,
-                    hintText: "Search",
-                    suffixIcon: Icon(Icons.list_alt),
-                    prefixIcon: Icon(Icons.search)),
+                    border: OutlineInputBorder(borderSide: BorderSide.none,borderRadius:BorderRadius.circular(30.r)),
+
+                    hintText: "Write the keyword and tap the search icon",
+                    prefixIcon: Icon(Icons.list_alt),
+                    suffix: IconButton(onPressed: (){
+                    String keyword = searchController.text;
+                    newsBloc.searchKeyword(keyword);
+                    }, icon: Icon(Icons.search),
+                    ),
               ),
+                          ),
             ),
             SizedBox(
               height: 20,
