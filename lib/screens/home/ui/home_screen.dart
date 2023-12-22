@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:siyatech/screens/search/search_screen.dart';
 
 import '../../../blocs/NewsBloc.dart';
 import '../../../models/article_model.dart';
@@ -53,9 +54,8 @@ class _HomeScreenState extends State<HomeScreen> {
   ];
 
   onSearchTap() {
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      Navigator.of(context).pushNamed('/search');
-    });
+    Navigator.push(context, MaterialPageRoute(builder: (context)=>SearchScreen()));
+
   }
 
   @override
@@ -69,7 +69,8 @@ class _HomeScreenState extends State<HomeScreen> {
           onTap: () {},
         ),
         actions: [
-          IconButton(onPressed: onSearchTap, icon: Icon(Icons.search, color: Colors.black,)),
+
+          InterfaceIcon(icon: Icons.search, onTap: onSearchTap),
           // InterfaceIcon(icon: Icons.search, onTap: onSearchTap),
           InterfaceIcon(icon: Icons.notification_important, onTap: () {}),
         ],
