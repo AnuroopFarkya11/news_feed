@@ -44,7 +44,7 @@ class ApiService{
       path: '/v2/everything',
       queryParameters: {
         'q': keyword,
-        'from': '2023-11-22',
+        'from': '2023-11-23',
         'sortBy': 'publishedAt',
         'apiKey': Config.apiKey,
       },
@@ -54,7 +54,7 @@ class ApiService{
     log(apiUrl.toString());
 
     final response = await http.get(
-      Uri.parse(ApiPath.tesla_News),
+      Uri.parse(apiUrl.toString()),
     );
 
     if (response.statusCode == 200) {
@@ -74,11 +74,3 @@ class ApiService{
 
 
 
-
-/*
-*
-*
-*
-*
-*
-* */
