@@ -5,9 +5,7 @@ import 'package:http/http.dart' as http;
 import '../../config.dart';
 import 'api_path.dart';
 
-class ApiService{
-
-
+class ApiService {
   static Future<List<Map<String, dynamic>>> getTopHeadlines() async {
     final response = await http.get(
       Uri.parse(ApiPath.TopHeadlines),
@@ -15,12 +13,14 @@ class ApiService{
 
     if (response.statusCode == 200) {
       final Map<String, dynamic> data = json.decode(response.body);
-      final List<Map<String, dynamic>> articles = List<Map<String, dynamic>>.from(data['articles']);
+      final List<Map<String, dynamic>> articles =
+          List<Map<String, dynamic>>.from(data['articles']);
       return articles;
     } else {
       throw Exception('Failed to load top headlines');
     }
   }
+
   static Future<List<Map<String, dynamic>>> getEverything() async {
     final response = await http.get(
       Uri.parse(ApiPath.tesla_News),
@@ -28,16 +28,17 @@ class ApiService{
 
     if (response.statusCode == 200) {
       final Map<String, dynamic> data = json.decode(response.body);
-      final List<Map<String, dynamic>> articles = List<Map<String, dynamic>>.from(data['articles']);
+      final List<Map<String, dynamic>> articles =
+          List<Map<String, dynamic>>.from(data['articles']);
       return articles;
     } else {
       throw Exception('Failed to load top headlines');
     }
   }
 
-  static Future<List<Map<String, dynamic>>> searchKeyword(String? keyword) async {
+  static Future<List<Map<String, dynamic>>> searchKeyword(
+      String? keyword) async {
 
-    String baseUrl = ApiPath.base_url;
     final Uri apiUrl = Uri(
       scheme: 'https',
       host: 'newsapi.org',
@@ -49,7 +50,6 @@ class ApiService{
       },
     );
 
-
     log(apiUrl.toString());
 
     final response = await http.get(
@@ -58,27 +58,13 @@ class ApiService{
 
     if (response.statusCode == 200) {
       final Map<String, dynamic> data = json.decode(response.body);
-      final List<Map<String, dynamic>> articles = List<Map<String, dynamic>>.from(data['articles']);
-      log(name: "SEARCH API RESPONSE","${articles.toString()}");
+      final List<Map<String, dynamic>> articles =
+          List<Map<String, dynamic>>.from(data['articles']);
+      log(name: "SEARCH API RESPONSE",articles.toString());
       return articles;
     } else {
       throw Exception('Failed to load top headlines');
     }
   }
-
-
-
 }
 
-
-
-
-
-
-/*
-*
-*
-*
-*
-*
-* */

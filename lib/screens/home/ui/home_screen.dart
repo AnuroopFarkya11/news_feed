@@ -81,7 +81,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         actions: [
           InterfaceIcon(icon: Icons.search, onTap: onSearchTap),
-          // InterfaceIcon(icon: Icons.search, onTap: onSearchTap),
+
           InterfaceIcon(icon: Icons.notification_important, onTap: () {}),
         ],
       ),
@@ -135,7 +135,6 @@ class _HomeScreenState extends State<HomeScreen> {
                             final article = articles[index];
                             return GestureDetector(
                                 onTap: () {
-                                  // Navigator.pushNamed(context,'/news',);
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(

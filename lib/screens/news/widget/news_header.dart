@@ -62,7 +62,7 @@ class NewsHeader extends StatelessWidget {
               ),
               //title??
               Text(
-                "${title ?? AppConstants.title}",
+                title ?? AppConstants.title,
                 maxLines: 3,
                 style: TextStyle(
                     color: BrandColors.white,
