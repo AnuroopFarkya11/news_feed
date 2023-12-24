@@ -4,6 +4,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:siyatech/blocs/searchBloc.dart';
 
 import '../../blocs/NewsBloc.dart';
 import '../../models/article_model.dart';
@@ -21,13 +22,13 @@ class SearchScreen extends StatefulWidget {
 class _SearchScreenState extends State<SearchScreen> {
   TextEditingController searchController = TextEditingController();
 
-  late final NewsBloc newsBloc;
+  // late final SearchBloc searchBloc;
+  late final NewsBloc newsBloc ;
 
   @override
   void initState() {
     super.initState();
     newsBloc = BlocProvider.of<NewsBloc>(context);
-
   }
 
   @override
@@ -88,6 +89,8 @@ class _SearchScreenState extends State<SearchScreen> {
                     suffix: IconButton(onPressed: (){
                     String keyword = searchController.text;
                     newsBloc.searchKeyword(keyword);
+
+
                     }, icon: Icon(Icons.search),
                     ),
               ),

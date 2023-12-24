@@ -1,5 +1,3 @@
-
-
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -23,6 +21,9 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   late final NewsBloc newsBloc;
+  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+  final ScrollController scrollController = ScrollController();
+  bool viewBool = false;
 
   @override
   void initState() {
@@ -54,28 +55,38 @@ class _HomeScreenState extends State<HomeScreen> {
   ];
 
   onSearchTap() {
-    Navigator.push(context, MaterialPageRoute(builder: (context)=>SearchScreen()));
-
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => SearchScreen()));
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: scaffoldKey,
+      drawer: Drawer(),
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
         leading: InterfaceIcon(
           icon: Icons.menu,
-          onTap: () {},
+          onTap: () {
+            if (scaffoldKey.currentState!.isDrawerOpen) {
+              scaffoldKey.currentState!.closeDrawer();
+              //close drawer, if drawer is open
+            } else {
+              scaffoldKey.currentState!.openDrawer();
+              //open drawer, if drawer is closed
+            }
+          },
         ),
         actions: [
-
           InterfaceIcon(icon: Icons.search, onTap: onSearchTap),
           // InterfaceIcon(icon: Icons.search, onTap: onSearchTap),
           InterfaceIcon(icon: Icons.notification_important, onTap: () {}),
         ],
       ),
       body: SingleChildScrollView(
+        controller: scrollController,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -128,8 +139,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) =>
-                                              NewsPage(
+                                          builder: (context) => NewsPage(
                                                 article: article,
                                               )));
                                 },
@@ -176,33 +186,47 @@ class _HomeScreenState extends State<HomeScreen> {
                           fontSize: 25.sp,
                           textBaseline: TextBaseline.alphabetic),
                     ),
-                    Text(
-                      "View all",
-                      style: TextStyle(
-                        color: Colors.blue,
-                        fontWeight: FontWeight.w500,
-                        fontSize: 15.sp,
-                        height: 4,
-                        textBaseline: TextBaseline.alphabetic,
+                    InkWell(
+                      onTap: (){
+                        setState(() {
+                          viewBool = true;
+                          scrollController.animateTo(200.h, duration: Duration(seconds: 1), curve: Curves.easeIn);
+                        });
+                      },
+                      child: Text(
+                        "View all",
+                        style: TextStyle(
+                          color: Colors.blue,
+                          fontWeight: FontWeight.w500,
+                          fontSize: 15.sp,
+                          height: 4,
+                          textBaseline: TextBaseline.alphabetic,
+                        ),
                       ),
                     )
                   ],
                 )),
 
-
-
             Container(
-              height: 500.h,
-              child: BlocBuilder<NewsBloc,List<Article>>(builder:(context, articles){
+              height: viewBool?450.h:200.h,
+              child: BlocBuilder<NewsBloc, List<Article>>(
+                  builder: (context, articles) {
                 return ListView.builder(
-                            shrinkWrap: true,
-                            itemCount: articles.length,
-                            itemBuilder: (context, index) {
-                              final article = articles[index];
-                              return GestureDetector(onTap:(){
-                                Navigator.of(context).push(MaterialPageRoute(builder: (context)=>NewsPage(article: article,)));
-                              },child: NewsCard(article:article,));
-                            });
+                    shrinkWrap: true,
+                    itemCount: articles.length,
+                    itemBuilder: (context, index) {
+                      final article = articles[index];
+                      return GestureDetector(
+                          onTap: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) => NewsPage(
+                                      article: article,
+                                    )));
+                          },
+                          child: NewsCard(
+                            article: article,
+                          ));
+                    });
               }),
             )
           ],

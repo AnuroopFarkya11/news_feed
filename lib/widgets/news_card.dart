@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:intl/intl.dart';
+import 'package:siyatech/utils/app_constants.dart';
 
 import '../models/article_model.dart';
 
@@ -28,7 +29,7 @@ class NewsCard extends StatelessWidget {
             borderRadius: BorderRadius.circular(12.r),
             child: Image.network(
               article?.urlToImage ??
-                  "https://t3.ftcdn.net/jpg/03/27/55/60/360_F_327556002_99c7QmZmwocLwF7ywQ68ChZaBry1DbtD.jpg",
+                  AppConstants.imageURl,
               fit: BoxFit.cover,
               height: 110.h,
               width: 120.w,
@@ -66,7 +67,7 @@ class NewsCard extends StatelessWidget {
                   children: [
                     CircleAvatar(
                       backgroundImage: Image.network(
-                              "https://t4.ftcdn.net/jpg/03/83/25/83/360_F_383258331_D8imaEMl8Q3lf7EKU2Pi78Cn0R7KkW9o.jpg")
+                              AppConstants.userImage)
                           .image,
                       radius: 15.r,
                     ),

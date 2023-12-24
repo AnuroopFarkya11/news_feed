@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:siyatech/blocs/searchBloc.dart';
 import 'package:siyatech/screens/home/ui/home_screen.dart';
 import 'package:siyatech/screens/news/news_screen.dart';
 import 'package:siyatech/screens/search/search_screen.dart';
@@ -26,10 +27,15 @@ class _MyappState extends State<NewsApp> {
         builder: (context, widget) => MultiBlocProvider(
           providers: [
             BlocProvider<NewsBloc>(create: (context) => NewsBloc()),
+            BlocProvider<SearchBloc>(create: (context)=>SearchBloc()),
+
           ],
           child: MaterialApp(
             debugShowCheckedModeBanner: false,
-            theme: ThemeData(),
+            theme: ThemeData(
+
+
+            ),
             initialRoute: '/',
             routes: {
               '/': (context) => HomeScreen(),

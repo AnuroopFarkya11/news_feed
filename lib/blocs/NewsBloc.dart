@@ -35,7 +35,6 @@ class NewsBloc extends Cubit<List<Article>> {
       print('Error: $error');
     }
   }
-
   Future<void> searchKeyword(String? keyword) async {
     try {
       final List<Map<String, dynamic>> articles =
