@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-
 import '../../blocs/NewsBloc.dart';
 import '../../models/article_model.dart';
 import '../../widgets/news_card.dart';
@@ -84,7 +83,7 @@ class _SearchScreenState extends State<SearchScreen> {
                     fillColor: Color(0xffF6F6F7),
                     border: OutlineInputBorder(borderSide: BorderSide.none,borderRadius:BorderRadius.circular(30.r)),
 
-                    hintText: "Type and tap the search icon",
+                    hintText: "Write the keyword and tap the search icon",
                     prefixIcon: Icon(Icons.list_alt),
                     suffix: IconButton(onPressed: (){
                     String keyword = searchController.text;

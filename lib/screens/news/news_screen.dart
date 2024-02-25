@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
-import 'package:siyatech/screens/news/widget/news_header.dart';
-
+import 'package:intl/intl.dart';
+import 'package:NewsFeed/screens/news/widget/news_header.dart';
+import 'package:NewsFeed/widgets/single_header_delegate.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../models/article_model.dart';
@@ -25,7 +25,8 @@ class _NewsPageState extends State<NewsPage> {
   Widget build(BuildContext context) {
     DateTime dateTime = DateTime.parse(
         widget.article?.publishedAt ?? DateTime.now().toString());
-
+    final topPadding = ScreenUtil().statusBarHeight;
+    final maxScreenSize = ScreenUtil().screenHeight;
     return Scaffold(
         backgroundColor: Colors.black,
         body:

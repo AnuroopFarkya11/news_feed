@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
-import 'package:siyatech/utils/app_constants.dart';
-import 'package:siyatech/utils/brand_colors.dart';
-import 'package:siyatech/widgets/app_icon.dart';
+import 'package:NewsFeed/utils/app_constants.dart';
+import 'package:NewsFeed/utils/brand_colors.dart';
+import 'package:NewsFeed/widgets/app_icon.dart';
 
 import '../../../utils/app_theme.dart';
 
