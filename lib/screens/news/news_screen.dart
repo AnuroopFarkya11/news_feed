@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import 'package:NewsFeed/screens/news/widget/news_header.dart';
-import 'package:NewsFeed/widgets/single_header_delegate.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../models/article_model.dart';

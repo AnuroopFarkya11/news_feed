@@ -1,3 +1,4 @@
+import 'package:NewsFeed/screens/dashboard/dash_board.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -38,7 +39,8 @@ class _MyappState extends State<NewsApp> {
             ),
             initialRoute: '/',
             routes: {
-              '/': (context) => HomeScreen(),
+              '/': (context) => DashBoard(),
+              '/home': (context) => HomeScreen(),
               '/search': (context) => SearchScreen(),
               '/news':(context)=>NewsPage()
             },
