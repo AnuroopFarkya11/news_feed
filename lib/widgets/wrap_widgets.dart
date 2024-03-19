@@ -26,17 +26,17 @@ class _SelectableContainerState extends State<SelectableContainer> {
       onTap: widget.onTap,
       child: Container(
         width: 80.h,
-        height: 50.h,
+        height: 35.h,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(35),
-          color: widget.isSelected ? Colors.blue : Colors.green,
+          color:Colors.blue ,
         ),
 
         child: Center(
           child: Text(
             widget.customName,
             style: TextStyle(
-              fontSize: 15,
+              fontSize: 10.sp,
               color: Colors.white,
               fontWeight: FontWeight.bold,
             ),

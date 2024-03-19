@@ -1,3 +1,4 @@
+import 'package:NewsFeed/routes/route_path.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -133,18 +134,9 @@ class _HomeScreenState extends State<HomeScreen> {
                           itemCount: articles.length,
                           itemBuilder: (context, index) {
                             final article = articles[index];
-                            return GestureDetector(
-                                onTap: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => NewsPage(
-                                                article: article,
-                                              )));
-                                },
-                                child: BreakingNewsCard(
-                                  article: article,
-                                ));
+                            return BreakingNewsCard(
+                              article: article,
+                            );
                           },
                         );
                       },
@@ -215,16 +207,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     itemCount: articles.length,
                     itemBuilder: (context, index) {
                       final article = articles[index];
-                      return GestureDetector(
-                          onTap: () {
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => NewsPage(
-                                      article: article,
-                                    )));
-                          },
-                          child: NewsCard(
-                            article: article,
-                          ));
+                      return NewsCard(
+                        article: article,
+                      );
                     });
               }),
             )

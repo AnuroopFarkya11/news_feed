@@ -130,16 +130,9 @@ class _SearchScreenState extends State<SearchScreen> {
                       itemCount: articles.length,
                       itemBuilder: (context, index) {
                         final article = articles[index];
-                        return GestureDetector(
-                            onTap: () {
-                              Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (context) => NewsPage(
-                                        article: article,
-                                      )));
-                            },
-                            child: NewsCard(
-                              article: article,
-                            ));
+                        return NewsCard(
+                          article: article,
+                        );
                       });
                 }),
               ),

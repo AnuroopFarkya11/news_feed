@@ -1,4 +1,8 @@
+import 'package:NewsFeed/constants/brand_style_constants.dart';
+import 'package:NewsFeed/constants/brand_color_constants.dart';
+import 'package:NewsFeed/constants/brand_text_constants.dart';
 import 'package:dots_indicator/dots_indicator.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -16,167 +20,143 @@ class HomeScreenTab extends StatefulWidget {
 }
 
 class _HomeScreenTabState extends State<HomeScreenTab> {
-  PageController _pageController =
-      PageController(initialPage: 2, viewportFraction: 0.95, keepPage: true);
+  late PageController _pageController;
   late final NewsBloc newsBloc;
   final ScrollController scrollController = ScrollController();
   bool viewBool = false;
+  int currentIndex = 0;
 
   @override
   void initState() {
     super.initState();
     newsBloc = BlocProvider.of<NewsBloc>(context);
     newsBloc.getHeadlineNews();
+    _pageController =
+        PageController(initialPage: 0, viewportFraction: 0.95, keepPage: true);
   }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: SingleChildScrollView(
-        controller: scrollController,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            ///    BREAKING NEWS AND VIEW ALL
-            Container(
-                margin: EdgeInsets.symmetric(vertical: 7.h, horizontal: 10.w),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  // crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    Text(
-                      "Breaking News",
-                      style: TextStyle(
-                          fontWeight: FontWeight.w600,
-                          fontSize: 25.sp,
-                          textBaseline: TextBaseline.alphabetic),
-                    ),
-                    Text(
-                      "View all",
-                      style: TextStyle(
-                        color: Colors.blue,
-                        fontWeight: FontWeight.w500,
-                        fontSize: 15.sp,
-                        height: 4,
-                        textBaseline: TextBaseline.alphabetic,
-                      ),
-                    )
-                  ],
-                )),
+    return SingleChildScrollView(
+      controller: scrollController,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          ///    BREAKING NEWS AND VIEW ALL
+          Container(
+              margin: EdgeInsets.symmetric(vertical: 0.h, horizontal: 10.w),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                // crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  Text(BrandTextConstant.homeTitle,
+                      style: BrandTextStyle.title),
+                  Text(
+                    BrandTextConstant.viewAll,
+                    style: BrandTextStyle.body15!.copyWith(height: 4),
+                  )
+                ],
+              )),
 
-            /// PAGE VIEWERS
-            Container(
-                height: 170.h,
-                child: BlocBuilder<NewsBloc, List<Article>>(
-                  builder: (context, articles) {
-                    return PageView.builder(
-                      clipBehavior: Clip.antiAlias,
-                      itemCount: articles.length,
-                      controller: _pageController,
-                      allowImplicitScrolling: true,
-                      pageSnapping: true,
-                      itemBuilder: (context, index) {
-                        final article = articles[index];
-                        return GestureDetector(
-                            onTap: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => NewsPage(
-                                            article: article,
-                                          )));
-                            },
-                            child: BreakingNewsCard(
+          /// PAGE VIEWERS
+          Container(
+              height: 200.h,
+              child: BlocBuilder<NewsBloc, List<Article>>(
+                builder: (context, articles) {
+                  bool isShimmer = articles.length == 0;
+                  return PageView.builder(
+                    clipBehavior: Clip.antiAlias,
+                    itemCount: isShimmer ? 5 : 5,
+                    controller: _pageController,
+                    allowImplicitScrolling: true,
+                    pageSnapping: true,
+                    onPageChanged: (value) {
+                      setState(() {
+                        currentIndex = value;
+                      });
+                    },
+                    itemBuilder: (context, index) {
+                      var article;
+                      if (!isShimmer) {
+                        article = articles[index];
+                      }
+                      return isShimmer
+                          ? BreakingNewsCard.shimmerCard()
+                          : BreakingNewsCard(
                               article: article,
-                            ));
-                      },
-                    );
-                  },
-                )),
-            SizedBox(
-              height: 10,
-            ),
-            Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-              DotsIndicator(
-
-                dotsCount: 5,
-                /// item list
-                position: 3,
-                decorator: DotsDecorator(
-
-
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12)),
-                  activeShape: StadiumBorder(side: BorderSide(),
-                  ),
+                            );
+                    },
+                  );
+                },
+              )),
+          SizedBox(
+            height: 10,
+          ),
+          Center(
+            child: DotsIndicator(
+              mainAxisSize: MainAxisSize.min,
+              dotsCount: 5,
+              mainAxisAlignment: MainAxisAlignment.center,
+              position: currentIndex.toDouble(),
+              decorator: DotsDecorator(
+                activeColor: BrandColors.brandColor,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12.r)),
+                activeShape: StadiumBorder(
+                  side: BorderSide.none,
                 ),
-              )
-            ]),
-
-            SizedBox(
-              height: 10,
+              ),
+              onTap: (val) {
+                _pageController.animateToPage(val.toInt(),
+                    duration: Duration(milliseconds: 500),
+                    curve: Curves.linear);
+              },
             ),
+          ),
 
-            Container(
-                margin: EdgeInsets.symmetric(vertical: 7.h, horizontal: 10.w),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  // crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    Text(
-                      "Recommendation",
-                      style: TextStyle(
-                          fontWeight: FontWeight.w600,
-                          fontSize: 25.sp,
-                          textBaseline: TextBaseline.alphabetic),
-                    ),
-                    InkWell(
+          Container(
+              margin: EdgeInsets.symmetric(vertical: 5.h, horizontal: 10.w),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                // crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  Text(
+                    BrandTextConstant.recommendation,
+                    style: BrandTextStyle.title,
+                  ),
+                  Visibility(
+                    visible: false,
+                    child: InkWell(
                       onTap: () {
                         setState(() {
                           viewBool = true;
                           scrollController.animateTo(200.h,
-                              duration: Duration(seconds: 1),
+                              duration: Duration(milliseconds: 200),
                               curve: Curves.easeIn);
                         });
                       },
                       child: Text(
-                        "View all",
-                        style: TextStyle(
-                          color: Colors.blue,
-                          fontWeight: FontWeight.w500,
-                          fontSize: 15.sp,
-                          height: 4,
-                          textBaseline: TextBaseline.alphabetic,
-                        ),
+                        BrandTextConstant.viewAll,
+                        style: BrandTextStyle.body15!.copyWith(height: 4),
                       ),
-                    )
-                  ],
-                )),
+                    ),
+                  )
+                ],
+              )),
 
-            Container(
-              height: viewBool ? 450.h : 200.h,
-              child: BlocBuilder<NewsBloc, List<Article>>(
-                  builder: (context, articles) {
-                return ListView.builder(
-                    shrinkWrap: true,
-                    itemCount: articles.length,
-                    itemBuilder: (context, index) {
-                      final article = articles[index];
-                      return GestureDetector(
-                          onTap: () {
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => NewsPage(
-                                      article: article,
-                                    )));
-                          },
-                          child: NewsCard(
-                            article: article,
-                          ));
-                    });
-              }),
-            )
-          ],
-        ),
+          BlocBuilder<NewsBloc, List<Article>>(builder: (context, articles) {
+            return ListView.builder(
+                controller: scrollController,
+                shrinkWrap: true,
+                itemCount: articles.length,
+                itemBuilder: (context, index) {
+                  final article = articles[index];
+                  return NewsCard(
+                    article: article,
+                  );
+                });
+          })
+        ],
       ),
     );
   }

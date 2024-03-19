@@ -1,4 +1,4 @@
-package com.example.siyatechProject
+package com.newsfeed.app
 
 import io.flutter.embedding.android.FlutterActivity
 
