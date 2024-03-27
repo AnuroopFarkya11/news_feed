@@ -1,4 +1,4 @@
-package com.newsfeed.app
+package com.android.application
 
 import io.flutter.embedding.android.FlutterActivity
 

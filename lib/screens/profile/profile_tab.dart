@@ -126,7 +126,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                             height: 10.h,
                                           ),
                                           StreamBuilder(stream: stream, builder: (context,snapshot){
-
+                                            print("${snapshot.data?.value}");
                                             return Text("${snapshot.data?.status??''}  ${snapshot.data?.value??'0'}");
                                           })
                                         ],
@@ -141,7 +141,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 AppDialogBox.showAppErrorDialog(
                                     context: context, exception: Exception(e));
                               }
-                            })
+                            }),
+
+
+                        buildProfileOption(context, 'Change origin', Icons.star,(){})
                       ],
                     ),
                   ),

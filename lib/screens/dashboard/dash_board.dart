@@ -73,7 +73,7 @@ class _DashBoardState extends State<DashBoard> with TickerProviderStateMixin {
           ),
         ),
         appBar: AppBar(
-          backgroundColor: Colors.transparent,
+          backgroundColor: Colors.white,
           elevation: 0,
           actions: [
             Builder(
