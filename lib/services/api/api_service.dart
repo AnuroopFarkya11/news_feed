@@ -6,9 +6,13 @@ import '../../config.dart';
 import 'api_path.dart';
 
 class ApiService {
-  static Future<List<Map<String, dynamic>>> getTopHeadlines() async {
+  static Future<List<Map<String, dynamic>>> getTopHeadlines(
+      {required String country}) async {
+    String endPoint =
+        ApiPath.newsApi(NewsFeedEndpoint.topHeadlines, country: country);
+
     final response = await http.get(
-      Uri.parse(ApiPath.TopHeadlines),
+      Uri.parse(endPoint),
     );
 
     if (response.statusCode == 200) {
@@ -38,7 +42,6 @@ class ApiService {
 
   static Future<List<Map<String, dynamic>>> searchKeyword(
       String? keyword) async {
-
     final Uri apiUrl = Uri(
       scheme: 'https',
       host: 'newsapi.org',
@@ -60,11 +63,10 @@ class ApiService {
       final Map<String, dynamic> data = json.decode(response.body);
       final List<Map<String, dynamic>> articles =
           List<Map<String, dynamic>>.from(data['articles']);
-      log(name: "SEARCH API RESPONSE",articles.toString());
+      log(name: "SEARCH API RESPONSE", articles.toString());
       return articles;
     } else {
       throw Exception('Failed to load top headlines');
     }
   }
 }
-

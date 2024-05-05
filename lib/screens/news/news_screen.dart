@@ -1,9 +1,9 @@
-import 'package:NewsFeed/constants/brand_style_constants.dart';
-import 'package:NewsFeed/constants/brand_text_constants.dart';
+import 'package:com.newsfeed.app/constants/brand_style_constants.dart';
+import 'package:com.newsfeed.app/constants/brand_text_constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:NewsFeed/screens/news/widget/news_header.dart';
+import 'package:com.newsfeed.app/screens/news/widget/news_header.dart';
 import 'package:screenshot/screenshot.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -29,12 +29,18 @@ class _NewsPageState extends State<NewsPage> {
   void initState() {
     super.initState();
   }
+  DateTime dateTime =DateTime.now();
 
   @override
   Widget build(BuildContext context) {
     _initArticle();
-    DateTime dateTime =
+
+    if(article?.publishedAt!=null && article?.publishedAt!="")
+      {
+        dateTime =
         DateTime.parse(article?.publishedAt ?? DateTime.now().toString());
+      }
+
 
     return Scaffold(
         backgroundColor: Colors.black,

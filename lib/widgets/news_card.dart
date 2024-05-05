@@ -1,7 +1,7 @@
 
-import 'package:NewsFeed/constants/brand_asset_constants.dart';
-import 'package:NewsFeed/constants/brand_text_constants.dart';
-import 'package:NewsFeed/routes/route_path.dart';
+import 'package:com.newsfeed.app/constants/brand_asset_constants.dart';
+import 'package:com.newsfeed.app/constants/brand_text_constants.dart';
+import 'package:com.newsfeed.app/routes/route_path.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -23,7 +23,7 @@ class _NewsCardState extends State<NewsCard> {
   Widget build(BuildContext context) {
     String? utcTimeString = widget.article?.publishedAt;
     String formattedTime='-';
-    if(utcTimeString!=null)
+    if(utcTimeString!=null&&utcTimeString!="")
       {
         DateTime? utcTime = DateTime.parse(utcTimeString);
         String formattedTime =

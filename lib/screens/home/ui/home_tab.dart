@@ -1,6 +1,7 @@
-import 'package:NewsFeed/constants/brand_style_constants.dart';
-import 'package:NewsFeed/constants/brand_color_constants.dart';
-import 'package:NewsFeed/constants/brand_text_constants.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:com.newsfeed.app/constants/brand_style_constants.dart';
+import 'package:com.newsfeed.app/constants/brand_color_constants.dart';
+import 'package:com.newsfeed.app/constants/brand_text_constants.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -12,6 +13,8 @@ import '../../../widgets/news_card.dart';
 import '../../news/news_screen.dart';
 import '../../../widgets/breaking_news_card.dart';
 
+
+Stream? stream;
 class HomeScreenTab extends StatefulWidget {
   const HomeScreenTab({Key? key}) : super(key: key);
 
@@ -20,6 +23,7 @@ class HomeScreenTab extends StatefulWidget {
 }
 
 class _HomeScreenTabState extends State<HomeScreenTab> {
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   late PageController _pageController;
   late final NewsBloc newsBloc;
   final ScrollController scrollController = ScrollController();
@@ -31,12 +35,20 @@ class _HomeScreenTabState extends State<HomeScreenTab> {
     super.initState();
     newsBloc = BlocProvider.of<NewsBloc>(context);
     newsBloc.getHeadlineNews();
+
     _pageController =
         PageController(initialPage: 0, viewportFraction: 0.95, keepPage: true);
+
+
+
+
   }
 
   @override
   Widget build(BuildContext context) {
+
+
+
     return SingleChildScrollView(
       controller: scrollController,
       child: Column(

@@ -1,4 +1,4 @@
-import 'package:NewsFeed/constants/brand_color_constants.dart';
+import 'package:com.newsfeed.app/constants/brand_color_constants.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/material.dart';
 

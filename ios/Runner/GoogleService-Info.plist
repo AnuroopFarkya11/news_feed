@@ -3,17 +3,17 @@
 <plist version="1.0">
 <dict>
 	<key>API_KEY</key>
-	<string>AIzaSyD5Qmx5t8evvMmEvpDuRmfJf79bLo4ABJ0</string>
+	<string>AIzaSyBoBSsRdiec_IoxFMyfjvORpR0VmFWio1U</string>
 	<key>GCM_SENDER_ID</key>
-	<string>816852086363</string>
+	<string>44382695843</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>com.newsfeed.newsapp</string>
 	<key>PROJECT_ID</key>
-	<string>allquickbootprojects</string>
+	<string>newsfeed-5e22a</string>
 	<key>STORAGE_BUCKET</key>
-	<string>allquickbootprojects.appspot.com</string>
+	<string>newsfeed-5e22a.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -25,6 +25,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:816852086363:ios:840a3b2789945ad7e6197e</string>
+	<string>1:44382695843:ios:93d04e71c86ce1facbea16</string>
 </dict>
 </plist>

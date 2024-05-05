@@ -1,4 +1,4 @@
-import 'package:NewsFeed/routes/route_path.dart';
+import 'package:com.newsfeed.app/routes/route_path.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -26,44 +26,62 @@ class BreakingNewsCard extends StatelessWidget {
         }
       },
       child: Card(
-        shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
         child: ClipRRect(
           borderRadius: BorderRadius.circular(30),
-          child: isShimmer? Shimmer.fromColors(baseColor: Colors.grey.shade300,
-            highlightColor: Colors.grey.shade100,child: Container(color: Colors.black,),):Stack(children: [
-            Image.network(
-              article?.urlToImage ??
-                  "https://t3.ftcdn.net/jpg/03/27/55/60/360_F_327556002_99c7QmZmwocLwF7ywQ68ChZaBry1DbtD.jpg",
-              fit: BoxFit.cover,
-              width: double.maxFinite,
-              height: double.maxFinite,
-            ),
-            Center(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(15.0),
-                    child: Text(
-                      article?.author ?? " ",
-                      style: TextStyle(color: Colors.white, fontSize: 15),
+          child: isShimmer
+              ? Shimmer.fromColors(
+                  baseColor: Colors.grey.shade300,
+                  highlightColor: Colors.grey.shade100,
+                  child: Container(
+                    color: Colors.black,
+                  ),
+                )
+              : Stack(children: [
+                  Image.network(
+                    article?.urlToImage ??
+                        "https://t3.ftcdn.net/jpg/03/27/55/60/360_F_327556002_99c7QmZmwocLwF7ywQ68ChZaBry1DbtD.jpg",
+                    fit: BoxFit.cover,
+                    width: double.maxFinite,
+                    height: double.maxFinite,
+                  ),
+                  Positioned.fill(child: Container(
+                    decoration:  BoxDecoration(
+                        gradient: LinearGradient(
+                          colors: [Colors.transparent, Colors.black.withOpacity(0.9)],
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                        )),
+                    child: SizedBox(),
+                  )),
+
+                  Center(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                          child: Text(
+                            article?.author ?? " ",
+                            style: TextStyle(color: Colors.white, fontSize: 15),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 15.0, vertical: 15),
+                          child: Text(article?.title ?? '',
+                              maxLines: 2,
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 17.sp,
+                                  fontWeight: FontWeight.bold),
+                              overflow: TextOverflow.ellipsis),
+                        ),
+                      ],
                     ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(15.0),
-                    child: Text(article?.title ?? '',
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold),
-                        overflow: TextOverflow.ellipsis),
-                  ),
-                ],
-              ),
-            )
-          ]),
+                  )
+                ]),
         ),
       ),
     );

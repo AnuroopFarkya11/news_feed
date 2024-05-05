@@ -1,5 +1,5 @@
-import 'package:NewsFeed/models/article_model.dart';
-import 'package:NewsFeed/services/database/sql_base.dart';
+import 'package:com.newsfeed.app/models/article_model.dart';
+import 'package:com.newsfeed.app/services/database/sql_base.dart';
 import 'package:bloc/bloc.dart';
 
 class FavouriteBloc extends Cubit<List<Article>>{

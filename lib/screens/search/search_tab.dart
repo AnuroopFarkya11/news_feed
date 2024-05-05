@@ -1,6 +1,8 @@
+import 'package:com.newsfeed.app/widgets/app_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import '../../blocs/NewsBloc.dart';
 import '../../models/article_model.dart';
 import '../../widgets/news_card.dart';
@@ -18,6 +20,14 @@ class _SearchTabState extends State<SearchTab> {
 
   // late final SearchBloc searchBloc;
   late final NewsBloc newsBloc ;
+  int selectedContainerIndex = -1;
+  List<String> customNames = [
+    'All',
+    'Politics',
+    'Sports',
+    'Education',
+    'Gaming',
+  ];
 
   @override
   void initState() {
@@ -27,16 +37,9 @@ class _SearchTabState extends State<SearchTab> {
 
   @override
   Widget build(BuildContext context) {
-    int selectedContainerIndex = -1;
-    List<String> customNames = [
-      'All',
-      'Politics',
-      'Sports',
-      'Education',
-      'Gaming',
-    ];
+
     return Container(
-      padding: EdgeInsets.only(left: 5.h),
+      padding: EdgeInsets.symmetric(horizontal: 10.w),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -56,27 +59,38 @@ class _SearchTabState extends State<SearchTab> {
           SizedBox(
             height: 23,
           ),
-          SizedBox(
-            height: 40.h,
-            child: TextField(
-              controller: searchController,
-              decoration: InputDecoration(
-                filled: true,
-                fillColor: Color(0xffF6F6F7),
-                border: OutlineInputBorder(borderSide: BorderSide.none,borderRadius:BorderRadius.circular(30.r)),
 
+          TextFormField(
+            controller: searchController,
+            maxLines:  1,
+
+
+            decoration: InputDecoration(
+
+                labelStyle: TextStyle(fontSize: 16.sp),
+                labelText: "Search",
                 hintText: "Write the keyword and tap the search icon",
-                prefixIcon: Icon(Icons.list_alt),
-                suffix: IconButton(onPressed: (){
-                  String keyword = searchController.text;
-                  newsBloc.searchKeyword(keyword);
-
-
-                }, icon: Icon(Icons.search),
+                hintStyle: TextStyle(color: Colors.grey),
+                border: OutlineInputBorder(
+                  borderSide: BorderSide.none,
+                  borderRadius: BorderRadius.circular(20.0),
                 ),
-              ),
+                filled: true,
+                fillColor: Colors.blueAccent.shade200.withOpacity(0.1),
+                suffixIconConstraints: BoxConstraints.tight(Size.square(35.sp)),
+                suffixIcon: GestureDetector(
+                  onTap: (){
+                    String keyword = searchController.text;
+                    newsBloc.searchKeyword(keyword);
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 9),
+                    child: SvgPicture.asset("assets/interface/search.svg",color: Colors.blueAccent.withOpacity(0.9),height: 5.sp,),
+                  ),
+                )
             ),
           ),
+
           SizedBox(
             height: 20,
           ),

@@ -1,4 +1,4 @@
-import 'package:NewsFeed/models/article_model.dart';
+import 'package:com.newsfeed.app/models/article_model.dart';
 import 'package:bloc/bloc.dart';
 
 import '../services/api/api_service.dart';

@@ -1,13 +1,13 @@
 import 'dart:io';
-import 'package:NewsFeed/constants/brand_asset_constants.dart';
-import 'package:NewsFeed/constants/brand_text_constants.dart';
-import 'package:NewsFeed/models/article_model.dart';
-import 'package:NewsFeed/services/database/sql_base.dart';
+import 'package:com.newsfeed.app/constants/brand_asset_constants.dart';
+import 'package:com.newsfeed.app/constants/brand_text_constants.dart';
+import 'package:com.newsfeed.app/models/article_model.dart';
+import 'package:com.newsfeed.app/services/database/sql_base.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
-import 'package:NewsFeed/constants/brand_color_constants.dart';
-import 'package:NewsFeed/widgets/app_icon.dart';
+import 'package:com.newsfeed.app/constants/brand_color_constants.dart';
+import 'package:com.newsfeed.app/widgets/app_icon.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:screenshot/screenshot.dart';
 import 'package:share_plus/share_plus.dart';
@@ -61,14 +61,14 @@ class _NewsHeaderState extends State<NewsHeader> {
             icon: isFav ? Icons.favorite : Icons.favorite_border,
             onTap: () async {
               if (widget.article != null && isFav == false) {
-                await DBBase.insert(widget.article!.toJson()).then((int res) {
+                await DBBase.insertArticle(widget.article!.toJson()).then((int res) {
                   setState(() {
                     isFav = true;
                   });
                 });
               } else {
                 if (isFav == true) {
-                  await DBBase.delete(title: widget.article!.title)
+                  await DBBase.deleteArticle(title: widget.article!.title)
                       .then((int value) {
                     if (value > 0) {
                       setState(() {

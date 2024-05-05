@@ -1,10 +1,10 @@
 import 'dart:developer';
-import 'package:NewsFeed/constants/brand_asset_constants.dart';
-import 'package:NewsFeed/constants/brand_style_constants.dart';
-import 'package:NewsFeed/constants/brand_text_constants.dart';
-import 'package:NewsFeed/models/article_model.dart';
-import 'package:NewsFeed/services/database/sql_base.dart';
-import 'package:NewsFeed/widgets/news_card.dart';
+import 'package:com.newsfeed.app/constants/brand_asset_constants.dart';
+import 'package:com.newsfeed.app/constants/brand_style_constants.dart';
+import 'package:com.newsfeed.app/constants/brand_text_constants.dart';
+import 'package:com.newsfeed.app/models/article_model.dart';
+import 'package:com.newsfeed.app/services/database/sql_base.dart';
+import 'package:com.newsfeed.app/widgets/news_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lottie/lottie.dart';

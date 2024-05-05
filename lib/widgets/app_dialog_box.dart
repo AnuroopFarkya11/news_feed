@@ -1,4 +1,4 @@
-import 'package:NewsFeed/constants/brand_color_constants.dart';
+import 'package:com.newsfeed.app/constants/brand_color_constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -16,11 +16,15 @@ class AppDialogBox {
   }
 
   static showAppErrorDialog(
-      {required BuildContext context, Exception? exception}) {
+      {required BuildContext context, Exception? exception, Function()? onTap}) {
     showDialog(
         context: context,
         builder: (context) {
           onPressed() {
+            if(onTap!=null)
+              {
+                onTap();
+              }
             Navigator.of(context).pop();
           }
 

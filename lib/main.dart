@@ -1,17 +1,28 @@
 
-import 'package:NewsFeed/blocs/favTabBloc.dart';
-import 'package:NewsFeed/routes/route_service.dart';
-import 'package:NewsFeed/services/database/sql_base.dart';
+import 'package:com.newsfeed.app/blocs/favTabBloc.dart';
+import 'package:com.newsfeed.app/blocs/hmmBloc.dart';
+import 'package:com.newsfeed.app/firebase_options.dart';
+import 'package:com.newsfeed.app/routes/route_path.dart';
+import 'package:com.newsfeed.app/routes/route_service.dart';
+import 'package:com.newsfeed.app/screens/auth/login/login_screen.dart';
+import 'package:com.newsfeed.app/screens/auth/mainpage.dart';
+import 'package:com.newsfeed.app/services/database/sql_base.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:NewsFeed/blocs/searchBloc.dart';
+import 'package:com.newsfeed.app/blocs/searchBloc.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'blocs/NewsBloc.dart';
-
+import 'screens/onboarding/screens/onboding/onboding_screen.dart';
+//com.android.application
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   await dotenv.load();
   await DBBase.db;
   runApp(const NewsApp());
@@ -34,12 +45,25 @@ class _MyappState extends State<NewsApp> {
             providers: [
               BlocProvider<NewsBloc>(create: (context) => NewsBloc()),
               BlocProvider<SearchBloc>(create: (context) => SearchBloc()),
-              BlocProvider<FavouriteBloc>(create: (context)=>FavouriteBloc())
+              BlocProvider<FavouriteBloc>(create: (context)=>FavouriteBloc()),
+              BlocProvider<ReelBloc>(create: (context)=>ReelBloc(AsyncSnapshot.nothing()))
             ],
             child: MaterialApp(
               debugShowCheckedModeBanner: false,
-              theme: ThemeData(),
-              initialRoute: '/',
+              theme: ThemeData(
+                useMaterial3: true,
+                brightness: Brightness.light,
+                fontFamily:GoogleFonts.libreFranklin().fontFamily
+
+              ),
+              darkTheme: ThemeData(
+                useMaterial3: true,
+                brightness: Brightness.dark,
+                fontFamily: GoogleFonts.libreFranklin().fontFamily
+              ),
+              themeMode: ThemeMode.system,
+              // home: OnboardingScreen(),
+              initialRoute: RoutePath.root,
               routes: RouteService.routes,
             ),
           )),
