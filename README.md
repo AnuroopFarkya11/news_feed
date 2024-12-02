@@ -1,3 +1,8 @@
+
+![NewsFeed](https://github.com/user-attachments/assets/ec660e77-7985-433b-bd2d-6f882efbb6ab)
+
+
+
 Responsive Design: The app ensures a consistent and visually appealing layout across different screen sizes using the flutter_screenutil package.
 
 Page Indicator: Navigate through news articles effortlessly with the help of a stylish page indicator provided by the dots_indicator package.
